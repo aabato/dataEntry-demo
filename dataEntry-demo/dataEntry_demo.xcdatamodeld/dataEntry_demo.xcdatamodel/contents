@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15E65" minimumToolsVersion="Automatic">
+    <entity name="Answer" representedClassName="Answer" syncable="YES">
+        <attribute name="answerScore" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="answerText" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="answerFromQuestionnaire" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Questionnaire" inverseName="answersForQuestionnaire" inverseEntity="Questionnaire" syncable="YES"/>
+        <relationship name="aToQ" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Question" inverseName="qToA" inverseEntity="Question" syncable="YES"/>
+    </entity>
+    <entity name="Question" representedClassName="Question" syncable="YES">
+        <attribute name="questionText" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="qToA" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Answer" inverseName="aToQ" inverseEntity="Answer" syncable="YES"/>
+        <relationship name="questionThatIsPartOfQuestionnaire" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Questionnaire" inverseName="questionsInQuestionnaire" inverseEntity="Questionnaire" syncable="YES"/>
+    </entity>
+    <entity name="Questionnaire" representedClassName="Questionnaire" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="answersForQuestionnaire" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Answer" inverseName="answerFromQuestionnaire" inverseEntity="Answer" syncable="YES"/>
+        <relationship name="questionsInQuestionnaire" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Question" inverseName="questionThatIsPartOfQuestionnaire" inverseEntity="Question" syncable="YES"/>
+        <relationship name="subjectFillingQuestionnaire" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Subject" inverseName="subjectsQuestionnaires" inverseEntity="Subject" syncable="YES"/>
+    </entity>
+    <entity name="Subject" representedClassName="Subject" syncable="YES">
+        <attribute name="gridNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="subjectsQuestionnaires" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Questionnaire" inverseName="subjectFillingQuestionnaire" inverseEntity="Questionnaire" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Question" positionX="-245" positionY="-90" width="128" height="90"/>
+        <element name="Answer" positionX="-450" positionY="-51" width="128" height="105"/>
+        <element name="Subject" positionX="-515" positionY="78" width="128" height="75"/>
+        <element name="Questionnaire" positionX="-36" positionY="63" width="128" height="103"/>
+    </elements>
+</model>
